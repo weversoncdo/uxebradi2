@@ -197,7 +197,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   mobileMenu.querySelectorAll('#menu-menu-mobile a').forEach(function (link) {
     link.addEventListener('click', function () {
-      closeMobileMenu();
+      if (!link.closest('.menu-item-has-children') || link.closest('.sub-menu')) {
+        closeMobileMenu();
+      }
     });
   });
 
@@ -361,4 +363,49 @@ document.addEventListener('DOMContentLoaded', function () {
   showSlide(0);
   restart();
 });
+
+/* ========================================================
+   SUBMENU PÓS-GRADUAÇÃO — INTERAÇÕES
+   ======================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+  // Mobile: clique em Pós-graduação expande/recolhe o submenu
+  const mobileParent = document.querySelector('.menu-mobile .menu-item-has-children');
+  if (mobileParent) {
+    const parentLink = mobileParent.querySelector('> a');
+    if (parentLink) {
+      parentLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        mobileParent.classList.toggle('active');
+      });
+    }
+  }
+
+  // Desktop: suporte a clique/toque e acessibilidade
+  const desktopItem = document.querySelector('.header-content .nav .menu-item-has-children.default-dropdown');
+  if (desktopItem) {
+    const desktopLink = desktopItem.querySelector('> a');
+    if (desktopLink) {
+      desktopLink.addEventListener('click', function (e) {
+        if (window.matchMedia('(hover: none)').matches) {
+          e.preventDefault();
+          desktopItem.classList.toggle('active');
+        }
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!desktopItem.contains(e.target)) {
+        desktopItem.classList.remove('active');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        desktopItem.classList.remove('active');
+      }
+    });
+  }
+});
+
 
