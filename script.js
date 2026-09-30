@@ -360,6 +360,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
   carousel.addEventListener('focusout', restart);
 
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  carousel.addEventListener('touchstart', function (e) {
+    if (e.touches && e.touches.length > 0) {
+      touchStartX = e.touches[0].clientX;
+    }
+    clearInterval(timer);
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', function (e) {
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          showSlide(current + 1); // Swipe left -> next
+        } else {
+          showSlide(current - 1); // Swipe right -> prev
+        }
+      }
+    }
+    restart();
+  }, { passive: true });
+
   showSlide(0);
   restart();
 });
