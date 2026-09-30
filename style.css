@@ -1037,7 +1037,7 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 .ebradi-feature-slide.is-active{display:flex}
 .ebradi-feature-slide:first-child{background:linear-gradient(105deg,#03132d 0%,#062a51 48%,#001127 100%)}
 .ebradi-feature-slide:nth-child(2){background:linear-gradient(105deg,#05333a 0%,#075969 50%,#06272e 100%)}
-.ebradi-feature-copy{position:relative;z-index:2;width:56%;padding:52px 0 48px max(34px,calc((100vw - 1080px)/2));display:flex;flex-direction:column;justify-content:center}
+.ebradi-feature-copy{position:relative;z-index:2;width:58%;padding:36px 44px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
 .ebradi-mini-logo{font-family:Arial,sans-serif;font-size:32px;font-weight:800;letter-spacing:-1.5px;margin-bottom:20px;position:relative;width:max-content}
 .ebradi-mini-logo:after{content:"";display:block;width:20px;height:5px;background:#3fbdd2;margin-top:3px}
 .ebradi-feature-copy h2{font-family:Georgia,'Times New Roman',serif;font-size:48px;line-height:.98;margin:0 0 18px;text-transform:uppercase;letter-spacing:-.5px;max-width:720px}
@@ -1090,14 +1090,34 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 
 /* ========================================================
    CARROSSEL PRINCIPAL — 3 BANNERS ABAIXO DO HEADER
+   Alinhado horizontalmente com o Logo e o Botão do Header
    ======================================================== */
+.ebradi-top-banner-section{
+  width:100%;
+  padding:24px 0 16px;
+  background:transparent;
+  position:relative;
+  box-sizing:border-box;
+}
+.ebradi-top-banner-section .row{
+  margin-right:-24px;
+  margin-left:-24px;
+}
+.ebradi-top-banner-section .col-12{
+  padding-right:24px;
+  padding-left:24px;
+  margin-bottom:0;
+  padding-bottom:0;
+}
 .ebradi-top-carousel{
   position:relative;
   width:100%;
   height:420px;
   overflow:hidden;
+  border-radius:12px;
   background:#0b1519;
   isolation:isolate;
+  box-shadow:0 8px 30px rgba(0,0,0,0.35);
 }
 .ebradi-top-track{
   position:relative;
@@ -1116,7 +1136,7 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   color:#fff;
 }
 .ebradi-top-slide.is-active{
-  display:block;
+  display:flex;
 }
 .ebradi-top-existing{
   background:#0b1519;
@@ -1271,11 +1291,11 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 .ebradi-feature-slide-top .ebradi-feature-copy{
   position:relative;
   z-index:2;
-  width:56%;
+  width:58%;
   height:420px;
   min-height:420px;
   max-height:420px;
-  padding:36px 0 36px max(34px,calc((100vw - 1080px)/2));
+  padding:36px 44px;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -1344,14 +1364,18 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   display:block;
 }
 .ebradi-top-dots{
-  position:relative;
-  z-index:5;
+  position:absolute;
+  bottom:14px;
+  left:0;
+  right:0;
+  z-index:10;
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:9px;
-  padding:12px 0 14px;
-  background:#0b1519;
+  gap:8px;
+  padding:0;
+  background:transparent;
+  pointer-events:auto;
 }
 .ebradi-top-dots button{
   width:9px;
@@ -1361,13 +1385,17 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   margin:0;
   border:0;
   border-radius:50%;
-  background:#8c979d;
+  background:rgba(255,255,255,0.45);
   cursor:pointer;
   appearance:none;
+  transition:background-color .2s ease,transform .2s ease;
+}
+.ebradi-top-dots button:hover{
+  background:rgba(255,255,255,0.8);
 }
 .ebradi-top-dots button.is-active{
   background:#3fbdd2;
-  transform:scale(1.12);
+  transform:scale(1.2);
 }
 
 @media (max-width:767px){
@@ -1385,9 +1413,21 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   }
 
   /* Novos banners: formato compacto e horizontal no mobile */
+  .ebradi-top-banner-section{
+    padding:14px 0 10px;
+  }
+  .ebradi-top-banner-section .row{
+    margin-right:-12px;
+    margin-left:-12px;
+  }
+  .ebradi-top-banner-section .col-12{
+    padding-right:12px;
+    padding-left:12px;
+  }
   .ebradi-top-carousel,
   .ebradi-top-track{
     height: 280px !important;
+    border-radius:10px;
   }
   .ebradi-feature-slide-top,
   .ebradi-feature-slide-top.is-active{
@@ -1398,6 +1438,7 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
     display:none;
     flex-direction:row;
     position:relative;
+    border-radius:10px;
   }
   .ebradi-feature-slide-top.is-active{display:flex}
 
@@ -1537,10 +1578,15 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
     background:linear-gradient(90deg,rgba(5,51,58,.78) 0%,rgba(5,51,58,.18) 45%,rgba(5,51,58,0) 100%);
   }
 
-  /* Bolinhas ficam imediatamente próximas ao banner, como nos demais slides */
+  /* Bolinhas ficam imediatamente próximas ao banner no mobile */
   .ebradi-top-dots{
-    padding:6px 0 8px;
-    gap:8px;
+    bottom: 8px;
+    gap: 7px;
+  }
+  .ebradi-top-dots button{
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
   }
 }
 
@@ -1553,215 +1599,173 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   .ebradi-feature-slide-top .ebradi-feature-copy p{font-size:17px}
 }
 
-/* ========================================================
-   SUBMENU PÓS-GRADUAÇÃO — MODELO EBRADI VERTICAL CONFORME IMAGEM
-   ======================================================== */
-header .header-content .nav ul li.menu-item-has-children.default-dropdown {
-  position: relative !important;
-}
-
-header .header-content .nav ul li.menu-item-has-children > a {
+/* ==========================================================================
+   Submenu Desktop (Dropdown)
+   ========================================================================== */
+.nav-item.has-dropdown {
   position: relative;
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-/* Seta nativa do item pai */
-header .header-content .nav ul li.menu-item-has-children > a::after {
-  content: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_12986_972' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='25' height='24'%3E%3Crect x='0.714355' width='24' height='24' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_12986_972)'%3E%3Cpath d='M12.7143 14.65C12.5976 14.65 12.4853 14.6333 12.3773 14.6C12.2686 14.5667 12.1726 14.5 12.0893 14.4L7.56426 9.90001C7.43092 9.75001 7.36426 9.57501 7.36426 9.37501C7.36426 9.17501 7.43926 9.00001 7.58926 8.85001C7.73926 8.71667 7.91426 8.65001 8.11426 8.65001C8.31426 8.65001 8.48926 8.71667 8.63926 8.85001L12.7143 12.925L16.8143 8.85001C16.9476 8.70001 17.1143 8.62901 17.3143 8.63701C17.5143 8.64567 17.6893 8.71667 17.8393 8.85001C17.9893 9.00001 18.0643 9.17901 18.0643 9.38701C18.0643 9.59567 17.9893 9.76667 17.8393 9.90001L13.3393 14.4C13.2559 14.5 13.1603 14.5667 13.0523 14.6C12.9436 14.6333 12.8309 14.65 12.7143 14.65Z' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A") !important;
-  display: inline-block !important;
-  height: 24px !important;
-  margin-left: 4px !important;
-  transition: transform 0.22s ease !important;
+.nav-link.dropdown-toggle {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #f7f7f7;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 12px 0;
+  text-decoration: none;
+  transition: color 0.18s ease;
 }
 
-header .header-content .nav ul li.menu-item-has-children:hover > a,
-header .header-content .nav ul li.menu-item-has-children.active > a {
-  background-color: #182c34 !important;
+.nav-item.has-dropdown:hover > .nav-link,
+.nav-item.has-dropdown.open > .nav-link {
+  color: #35bfd8;
 }
 
-header .header-content .nav ul li.menu-item-has-children:hover > a::after,
-header .header-content .nav ul li.menu-item-has-children.active > a::after {
-  transform: rotate(180deg) !important;
+/* Seta giratória do Desktop */
+.dropdown-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease;
+  color: #f7f7f7;
+  margin-left: 2px;
 }
 
-/* Dropdown Container — Formato Vertical EBRADI */
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul {
-  position: absolute !important;
-  top: calc(100% + 6px) !important;
-  left: 0 !important;
-  background-color: #203942 !important;
-  border: 1px solid #366170 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
-  padding: 16px 22px !important;
-  display: none !important;
-  grid-template-columns: 1fr !important;
-  min-width: 250px !important;
-  width: max-content !important;
-  gap: 0 !important;
-  z-index: 99999 !important;
-  margin: 0 !important;
-  list-style: none !important;
+.nav-item.has-dropdown:hover .dropdown-arrow,
+.nav-item.has-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+  color: #35bfd8;
 }
 
-/* Ponte invisível para mouse não perder o hover */
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul::before {
-  content: "" !important;
-  position: absolute !important;
-  top: -12px !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 12px !important;
-  background: transparent !important;
+/* Caixa suspensa do Submenu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% - 6px);
+  left: 0;
+  min-width: 224px;
+  background-color: #0d232b;
+  border: 1px solid #1a3c46;
+  border-top: 2px solid #35bfd8;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul::after {
-  display: none !important;
+/* Abre por hover ou por classe .open (clique/teclado) */
+.nav-item.has-dropdown:hover .dropdown-menu,
+.nav-item.has-dropdown.open .dropdown-menu {
+  display: flex;
 }
 
-header .header-content .nav ul li.menu-item-has-children.default-dropdown:hover ul,
-header .header-content .nav ul li.menu-item-has-children.default-dropdown:focus-within ul,
-header .header-content .nav ul li.menu-item-has-children.default-dropdown.active ul {
-  display: grid !important;
+/* Itens do submenu */
+.dropdown-menu .dropdown-item {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #35bfd8;
+  text-decoration: none;
+  border-bottom: 1px solid #173740;
+  transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+  letter-spacing: 0.1px;
+  line-height: 1.35;
+  white-space: nowrap;
+  text-align: left;
+  background-color: #0d232b;
+  margin: 0;
 }
 
-/* Itens da lista vertical */
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li {
-  height: auto !important;
-  min-height: 42px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  padding: 8px 0 !important;
-  margin: 0 !important;
-  list-style: none !important;
+.dropdown-menu .dropdown-item:last-child {
+  border-bottom: none;
 }
 
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li:first-child {
-  padding-top: 0 !important;
+.dropdown-menu .dropdown-item.active-white {
+  color: #ffffff;
 }
 
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li:last-child {
-  padding-bottom: 0 !important;
+.dropdown-menu .dropdown-item:hover {
+  color: #ffffff;
+  background-color: #153742;
+  padding-left: 22px;
 }
 
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li:not(:first-child) {
-  border-top: 1px solid #366170 !important;
+/* ==========================================================================
+   Submenu Mobile (Accordion)
+   ========================================================================== */
+.mobile-nav-group {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
 }
 
-/* Links do dropdown vertical */
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li a:not(.btn) {
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 17px !important;
-  line-height: 1.3 !important;
-  color: #3fbdd2 !important;
-  padding: 2px 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  width: 100% !important;
-  white-space: nowrap !important;
-  background-color: transparent !important;
-  border-radius: 0 !important;
-  text-decoration: none !important;
-  transition: color 0.18s ease, transform 0.18s ease !important;
+.mobile-dropdown-toggle {
+  background: none;
+  border: 0;
+  color: #eaf1f2;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li a:not(.btn):hover,
-header .header-content .nav ul li.menu-item-has-children.default-dropdown ul li a:not(.btn):focus {
-  color: #ffffff !important;
-  transform: translateX(4px) !important;
-  background-color: transparent !important;
+.mobile-arrow {
+  font-size: 16px;
+  color: #35bfd8;
+  transition: transform 0.2s ease;
 }
 
-/* ========================================================
-   MENU MOBILE — MODELO EBRADI VERTICAL
-   ======================================================== */
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children {
-  position: relative !important;
-  width: 100% !important;
+.mobile-dropdown-toggle.open .mobile-arrow {
+  transform: rotate(180deg);
 }
 
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children > a {
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 20px !important;
-  line-height: 120% !important;
-  letter-spacing: .02em !important;
-  text-transform: uppercase !important;
-  color: #3fbdd2 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  padding: 16px 0 !important;
-  position: relative !important;
-  text-decoration: none !important;
-  transition: color 0.2s ease, padding-bottom 0.2s ease !important;
-  cursor: pointer !important;
+.mobile-submenu {
+  display: none;
+  flex-direction: column;
+  background: #0d232b;
+  border-radius: 4px;
+  border: 1px solid #1c3d46;
+  overflow: hidden;
+  margin-top: 6px;
 }
 
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children > a::after {
-  content: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_15337_13760' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_15337_13760)'%3E%3Cpath d='M11.9999 14.65C11.8832 14.65 11.7709 14.6333 11.6629 14.6C11.5542 14.5667 11.4582 14.5 11.3749 14.4L6.8499 9.90001C6.71657 9.75001 6.6499 9.57501 6.6499 9.37501C6.6499 9.17501 6.7249 9.00001 6.8749 8.85001C7.0249 8.71667 7.1999 8.65001 7.3999 8.65001C7.5999 8.65001 7.7749 8.71667 7.9249 8.85001L11.9999 12.925L16.0999 8.85001C16.2332 8.70001 16.3999 8.62901 16.5999 8.63701C16.7999 8.64567 16.9749 8.71667 17.1249 8.85001C17.2749 9.00001 17.3499 9.17901 17.3499 9.38701C17.3499 9.59567 17.2749 9.76667 17.1249 9.90001L12.6249 14.4C12.5416 14.5 12.4459 14.5667 12.3379 14.6C12.2292 14.6333 12.1166 14.65 11.9999 14.65Z' fill='%23366170'/%3E%3C/g%3E%3C/svg%3E%0A") !important;
-  display: block !important;
-  width: 24px !important;
-  height: 24px !important;
-  transition: transform 0.3s ease !important;
+.mobile-submenu.open {
+  display: flex;
 }
 
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children.active > a::after {
-  transform: rotate(180deg) !important;
+.mobile-subitem {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #35bfd8;
+  border-bottom: 1px solid #17363f;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children.active > a {
-  padding-bottom: 8px !important;
+.mobile-subitem:last-child {
+  border-bottom: 0;
 }
 
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children ul {
-  overflow: hidden !important;
-  max-height: 0 !important;
-  transition: max-height 0.35s ease !important;
-  padding-left: 14px !important;
-  list-style: none !important;
-  margin: 0 !important;
+.mobile-subitem.highlight-white,
+.mobile-subitem:hover {
+  color: #ffffff;
+  background: #153742;
 }
-
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children.active ul {
-  max-height: 600px !important;
-  padding-bottom: 12px !important;
-}
-
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children ul li {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children ul li a {
-  font-family: "IBM Plex Sans", sans-serif !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
-  font-size: 16.5px !important;
-  line-height: 165% !important;
-  color: #ffffff !important;
-  padding: 9px 0 !important;
-  display: block !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(54, 97, 112, 0.45) !important;
-  transition: color 0.15s ease, padding-left 0.15s ease !important;
-}
-
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children ul li:last-child a {
-  border-bottom: none !important;
-}
-
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children ul li a:hover,
-.menu-mobile .mobile-menu-container ul li.menu-item-has-children ul li a:active {
-  color: #3fbdd2 !important;
-  padding-left: 6px !important;
-}
-
-
-

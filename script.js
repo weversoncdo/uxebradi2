@@ -392,45 +392,59 @@ document.addEventListener('DOMContentLoaded', function () {
 /* ========================================================
    SUBMENU PÓS-GRADUAÇÃO — INTERAÇÕES
    ======================================================== */
-document.addEventListener('DOMContentLoaded', function () {
-  // Mobile: clique em Pós-graduação expande/recolhe o submenu
-  const mobileParent = document.querySelector('.menu-mobile .menu-item-has-children');
-  if (mobileParent) {
-    const parentLink = mobileParent.querySelector('> a');
-    if (parentLink) {
-      parentLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        mobileParent.classList.toggle('active');
-      });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Interação do Submenu Desktop
+  const posGradItem = document.getElementById('posGradItem');
+  const posGradToggle = document.getElementById('posGradToggle');
+
+  function openPosGrad() {
+    posGradItem?.classList.add('open');
+    posGradToggle?.setAttribute('aria-expanded', 'true');
   }
 
-  // Desktop: suporte a clique/toque e acessibilidade
-  const desktopItem = document.querySelector('.header-content .nav .menu-item-has-children.default-dropdown');
-  if (desktopItem) {
-    const desktopLink = desktopItem.querySelector('> a');
-    if (desktopLink) {
-      desktopLink.addEventListener('click', function (e) {
-        if (window.matchMedia('(hover: none)').matches) {
-          e.preventDefault();
-          desktopItem.classList.toggle('active');
-        }
-      });
-    }
-
-    document.addEventListener('click', function (e) {
-      if (!desktopItem.contains(e.target)) {
-        desktopItem.classList.remove('active');
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        desktopItem.classList.remove('active');
-      }
-    });
+  function closePosGrad() {
+    posGradItem?.classList.remove('open');
+    posGradToggle?.setAttribute('aria-expanded', 'false');
   }
+
+  // Alterna ao clicar
+  posGradToggle?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (posGradItem?.classList.contains('open')) {
+      closePosGrad();
+    } else {
+      openPosGrad();
+    }
+  });
+
+  // Abre e fecha no hover
+  posGradItem?.addEventListener('mouseenter', openPosGrad);
+  posGradItem?.addEventListener('mouseleave', closePosGrad);
+
+  // Fecha ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (posGradItem && !posGradItem.contains(e.target)) {
+      closePosGrad();
+    }
+  });
+
+  // Fecha com a tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closePosGrad();
+    }
+  });
+
+  // 2. Interação do Submenu Mobile (Accordion)
+  const mobilePosBtn = document.getElementById('mobilePosBtn');
+  const mobilePosSub = document.getElementById('mobilePosSub');
+
+  mobilePosBtn?.addEventListener('click', () => {
+    mobilePosBtn.classList.toggle('open');
+    mobilePosSub?.classList.toggle('open');
+    const isOpen = mobilePosBtn.classList.contains('open');
+    mobilePosBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
 });
 
 
