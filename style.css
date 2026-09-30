@@ -1072,9 +1072,20 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
  .ebradi-feature-dots{padding-top:11px}
 }
 @media (min-width:768px) and (max-width:1100px){
- .ebradi-feature-copy{padding-left:35px;width:58%}
- .ebradi-feature-copy h2{font-size:40px}
- .ebradi-feature-copy p{font-size:17px}
+ .ebradi-top-slide,
+ .ebradi-feature-slide-top,
+ .ebradi-feature-slide-top.pos-50{
+   height:420px;
+   min-height:420px;
+   max-height:420px;
+   overflow:hidden;
+ }
+ .ebradi-feature-copy{padding-left:35px;width:58%;height:420px}
+ .ebradi-feature-copy h2{font-size:36px}
+ .ebradi-feature-copy p{font-size:15px}
+ .ebradi-feature-slide-top.pos-50 h2{font-size:30px;line-height:1.06;margin-bottom:10px}
+ .ebradi-feature-slide-top.pos-50 .banner-argument{font-size:13.5px;line-height:1.35;margin-bottom:14px}
+ .ebradi-feature-slide-top.pos-50 .ebradi-feature-cta.pos-cta{padding:12px 20px;font-size:13px}
 }
 
 /* ========================================================
@@ -1083,6 +1094,7 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 .ebradi-top-carousel{
   position:relative;
   width:100%;
+  height:420px;
   overflow:hidden;
   background:#0b1519;
   isolation:isolate;
@@ -1090,13 +1102,16 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 .ebradi-top-track{
   position:relative;
   width:100%;
+  height:420px;
   display:block;
 }
 .ebradi-top-slide{
   display:none;
   position:relative;
   width:100%;
+  height:420px;
   min-height:420px;
+  max-height:420px;
   overflow:hidden;
   color:#fff;
 }
@@ -1129,6 +1144,12 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 }
 .ebradi-feature-slide-top{
   display:none;
+  position:relative;
+  width:100%;
+  height:420px;
+  min-height:420px;
+  max-height:420px;
+  overflow:hidden;
   background:linear-gradient(105deg,#03132d 0%,#062a51 48%,#001127 100%);
 }
 .ebradi-feature-slide-top.is-active{
@@ -1138,46 +1159,50 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   background:linear-gradient(105deg,#05333a 0%,#075969 50%,#06272e 100%);
 }
 .ebradi-feature-slide-top.pos-50{
+  height:420px;
+  min-height:420px;
+  max-height:420px;
+  overflow:hidden;
   background:linear-gradient(105deg,#020e24 0%,#06264d 50%,#011129 100%);
 }
 .ebradi-feature-slide-top.pos-50 .ebradi-promo-badge{
   display:inline-flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
   background:rgba(63,189,210,0.12);
   border:1px solid rgba(63,189,210,0.45);
   border-radius:999px;
-  padding:6px 16px;
-  margin-bottom:14px;
+  padding:4px 12px;
+  margin-bottom:12px;
   width:fit-content;
 }
 .ebradi-feature-slide-top.pos-50 .badge-discount{
   background:#ff5b4d;
   color:#ffffff;
   font-family:Arial,sans-serif;
-  font-size:13px;
+  font-size:12px;
   font-weight:900;
   letter-spacing:0.5px;
-  padding:4px 10px;
+  padding:3px 8px;
   border-radius:999px;
   line-height:1;
 }
 .ebradi-feature-slide-top.pos-50 .badge-text{
   color:#3fbdd2;
   font-family:Arial,sans-serif;
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
   letter-spacing:0.8px;
   text-transform:uppercase;
 }
 .ebradi-feature-slide-top.pos-50 h2{
   font-family:Georgia,'Times New Roman',serif;
-  font-size:46px;
-  line-height:1.02;
-  margin:0 0 16px;
+  font-size:36px;
+  line-height:1.04;
+  margin:0 0 12px;
   text-transform:uppercase;
   letter-spacing:-0.5px;
-  max-width:720px;
+  max-width:650px;
 }
 .ebradi-feature-slide-top.pos-50 h2 span{
   color:#ff5b4d;
@@ -1185,10 +1210,10 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 }
 .ebradi-feature-slide-top.pos-50 .banner-argument{
   font-family:Arial,sans-serif;
-  font-size:17.5px;
-  line-height:1.45;
-  max-width:650px;
-  margin:0 0 22px;
+  font-size:15px;
+  line-height:1.4;
+  max-width:580px;
+  margin:0 0 16px;
   color:#e4edf3;
 }
 .ebradi-feature-slide-top.pos-50 .banner-argument strong{
@@ -1198,21 +1223,20 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 .ebradi-feature-slide-top.pos-50 .ebradi-banner-actions{
   display:flex;
   align-items:center;
-  flex-wrap:wrap;
-  gap:20px;
+  gap:16px;
 }
 .ebradi-feature-slide-top.pos-50 .ebradi-feature-cta.pos-cta{
   background:#ff5b4d;
   color:#ffffff;
-  font:800 16px/1 Arial,sans-serif;
-  padding:16px 28px;
+  font:800 14px/1 Arial,sans-serif;
+  padding:13px 22px;
   border-radius:6px;
   text-transform:uppercase;
   letter-spacing:0.5px;
   display:inline-flex;
   align-items:center;
-  gap:14px;
-  box-shadow:0 8px 24px rgba(255,91,77,0.35);
+  gap:12px;
+  box-shadow:0 6px 20px rgba(255,91,77,0.35);
   transition:transform 0.2s ease,background-color 0.2s ease,box-shadow 0.2s ease;
 }
 .ebradi-feature-slide-top.pos-50 .ebradi-feature-cta.pos-cta:hover{
@@ -1223,15 +1247,15 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 .ebradi-feature-slide-top.pos-50 .ebradi-banner-guarantee{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:7px;
   color:#a2b7c6;
   font-family:Arial,sans-serif;
-  font-size:13.5px;
+  font-size:13px;
   font-weight:500;
 }
 .ebradi-feature-slide-top.pos-50 .ebradi-banner-guarantee .check-icon{
-  width:18px;
-  height:18px;
+  width:17px;
+  height:17px;
   flex-shrink:0;
 }
 .ebradi-feature-slide-top.pos-50 .ebradi-feature-photo img{
@@ -1248,8 +1272,10 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   position:relative;
   z-index:2;
   width:56%;
+  height:420px;
   min-height:420px;
-  padding:52px 0 48px max(34px,calc((100vw - 1080px)/2));
+  max-height:420px;
+  padding:36px 0 36px max(34px,calc((100vw - 1080px)/2));
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -1359,10 +1385,16 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   }
 
   /* Novos banners: formato compacto e horizontal no mobile */
+  .ebradi-top-carousel,
+  .ebradi-top-track{
+    height: 280px !important;
+  }
   .ebradi-feature-slide-top,
   .ebradi-feature-slide-top.is-active{
     min-height:280px;
     height:280px;
+    max-height:280px;
+    overflow:hidden;
     display:none;
     flex-direction:row;
     position:relative;
@@ -1371,9 +1403,10 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
 
   .ebradi-feature-slide-top .ebradi-feature-copy{
     width:58%;
-    height:100%;
-    min-height:0;
-    padding:18px 8px 16px 18px;
+    height:280px;
+    min-height:280px;
+    max-height:280px;
+    padding:16px 8px 16px 16px;
     justify-content:center;
     box-sizing:border-box;
     background:linear-gradient(90deg,rgba(3,19,45,.99) 0%,rgba(3,19,45,.96) 72%,rgba(3,19,45,.35) 100%);
@@ -1383,53 +1416,63 @@ body.page-id-11 .page-hero .text p{ margin:0 !important; }
   }
   .ebradi-feature-slide-top.pos-50,
   .ebradi-feature-slide-top.pos-50.is-active{
-    min-height: 290px;
-    height: auto;
+    min-height: 280px;
+    height: 280px;
+    max-height: 280px;
+    overflow: hidden;
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-feature-copy{
     width: 60%;
-    padding: 18px 8px 18px 16px;
+    height: 280px;
+    min-height: 280px;
+    max-height: 280px;
+    padding: 14px 8px 14px 16px;
+    justify-content: center;
+    box-sizing: border-box;
     background: linear-gradient(90deg, rgba(2,14,36,.99) 0%, rgba(2,14,36,.96) 72%, rgba(2,14,36,.3) 100%);
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-promo-badge{
-    padding: 3px 8px;
-    gap: 6px;
-    margin-bottom: 7px;
+    padding: 2px 7px;
+    gap: 5px;
+    margin-bottom: 5px;
   }
   .ebradi-feature-slide-top.pos-50 .badge-discount{
-    font-size: 9.5px;
-    padding: 2px 6px;
+    font-size: 9px;
+    padding: 2px 5px;
   }
   .ebradi-feature-slide-top.pos-50 .badge-text{
-    font-size: 8.5px;
+    font-size: 8px;
+    letter-spacing: 0.5px;
   }
   .ebradi-feature-slide-top.pos-50 h2{
-    font-size: 18px;
-    line-height: 1.05;
-    margin-bottom: 7px;
+    font-size: 16px;
+    line-height: 1.08;
+    margin-bottom: 5px;
+    letter-spacing: -0.2px;
   }
   .ebradi-feature-slide-top.pos-50 h2 span{
     display: inline;
   }
   .ebradi-feature-slide-top.pos-50 .banner-argument{
-    font-size: 10.5px;
+    font-size: 10px;
     line-height: 1.25;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-banner-actions{
-    gap: 8px;
+    gap: 6px;
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-feature-cta.pos-cta{
-    font-size: 11px;
-    padding: 9px 14px;
-    gap: 8px;
+    font-size: 10.5px;
+    padding: 8px 13px;
+    gap: 6px;
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-banner-guarantee{
     display: none;
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-feature-photo{
     width: 44%;
-    height: 100%;
+    height: 280px;
+    max-height: 280px;
   }
   .ebradi-feature-slide-top.pos-50 .ebradi-feature-photo img{
     object-position: center center;
