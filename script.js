@@ -390,60 +390,96 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ========================================================
-   SUBMENU PÓS-GRADUAÇÃO — INTERAÇÕES
+   SUBMENUS DROPDOWNS (PÓS-GRADUAÇÃO E CURSOS LIVRES)
    ======================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Interação do Submenu Desktop
-  const posGradItem = document.getElementById('posGradItem');
-  const posGradToggle = document.getElementById('posGradToggle');
+  // 1. Interação dos Submenus Desktop
+  const dropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
 
-  function openPosGrad() {
-    posGradItem?.classList.add('open');
-    posGradToggle?.setAttribute('aria-expanded', 'true');
-  }
+  dropdownItems.forEach((item) => {
+    const toggle = item.querySelector('.dropdown-toggle');
 
-  function closePosGrad() {
-    posGradItem?.classList.remove('open');
-    posGradToggle?.setAttribute('aria-expanded', 'false');
-  }
-
-  // Alterna ao clicar
-  posGradToggle?.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (posGradItem?.classList.contains('open')) {
-      closePosGrad();
-    } else {
-      openPosGrad();
+    function openDropdown() {
+      dropdownItems.forEach((other) => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.add('open');
+      toggle?.setAttribute('aria-expanded', 'true');
     }
+
+    function closeDropdown() {
+      item.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (item.classList.contains('open')) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
+    });
+
+    item.addEventListener('mouseenter', openDropdown);
+    item.addEventListener('mouseleave', closeDropdown);
+
+    // Fecha ao clicar em qualquer item do submenu
+    item.querySelectorAll('.dropdown-item').forEach((subLink) => {
+      subLink.addEventListener('click', () => {
+        closeDropdown();
+      });
+    });
   });
 
-  // Abre e fecha no hover
-  posGradItem?.addEventListener('mouseenter', openPosGrad);
-  posGradItem?.addEventListener('mouseleave', closePosGrad);
-
-  // Fecha ao clicar fora
+  // Fecha dropdowns ao clicar fora
   document.addEventListener('click', (e) => {
-    if (posGradItem && !posGradItem.contains(e.target)) {
-      closePosGrad();
-    }
+    dropdownItems.forEach((item) => {
+      if (!item.contains(e.target)) {
+        item.classList.remove('open');
+        item.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      }
+    });
   });
 
-  // Fecha com a tecla ESC
+  // Fecha dropdowns com a tecla ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      closePosGrad();
+      dropdownItems.forEach((item) => {
+        item.classList.remove('open');
+        item.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      });
     }
   });
 
-  // 2. Interação do Submenu Mobile (Accordion)
-  const mobilePosBtn = document.getElementById('mobilePosBtn');
-  const mobilePosSub = document.getElementById('mobilePosSub');
+  // 2. Interação dos Submenus Mobile (Accordions)
+  const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-toggle');
 
-  mobilePosBtn?.addEventListener('click', () => {
-    mobilePosBtn.classList.toggle('open');
-    mobilePosSub?.classList.toggle('open');
-    const isOpen = mobilePosBtn.classList.contains('open');
-    mobilePosBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  mobileDropdownBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const parentGroup = btn.closest('.mobile-nav-group');
+      const submenu = parentGroup ? parentGroup.querySelector('.mobile-submenu') : null;
+      if (submenu) {
+        const willOpen = !btn.classList.contains('open');
+
+        // Fecha outros accordions para manter o menu mobile limpo
+        mobileDropdownBtns.forEach((otherBtn) => {
+          if (otherBtn !== btn) {
+            otherBtn.classList.remove('open');
+            otherBtn.setAttribute('aria-expanded', 'false');
+            const otherSub = otherBtn.closest('.mobile-nav-group')?.querySelector('.mobile-submenu');
+            otherSub?.classList.remove('open');
+          }
+        });
+
+        btn.classList.toggle('open', willOpen);
+        submenu.classList.toggle('open', willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      }
+    });
   });
 });
 

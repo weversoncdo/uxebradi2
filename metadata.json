@@ -1,5 +1,8 @@
 {
   "name": "EBRADI - Escola de Direito \\ Pós-graduação em Direito Online",
   "description": "Obtenha uma formação especializada e inovadora em Direito na EBRADI e destaque-se no mercado jurídico. Capacite-se para o sucesso com nossos cursos de Pós-Graduação Online.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
