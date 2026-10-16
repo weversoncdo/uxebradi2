@@ -483,4 +483,216 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/* ========================================================
+   EBRADI EXPERIENCE — CARROSSEL E MODAL DE AULAS EXPERIMENTAIS
+   ======================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('ebradiExpTrack');
+  const trackContainer = document.querySelector('.ebradi-exp-track-container');
+  const prevBtn = document.getElementById('ebradiExpPrev');
+  const nextBtn = document.getElementById('ebradiExpNext');
+  const dotsContainer = document.getElementById('ebradiExpDots');
+
+  if (!track || !trackContainer) return;
+
+  const slides = Array.from(track.querySelectorAll('.ebradi-exp-slide'));
+  let currentIndex = 0;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
+
+  function getVisibleSlides() {
+    const width = window.innerWidth;
+    if (width <= 640) return 1;
+    if (width <= 991) return 2;
+    return 3;
+  }
+
+  function getMaxIndex() {
+    const visible = getVisibleSlides();
+    return Math.max(0, slides.length - visible);
+  }
+
+  function updateSlidePosition(index) {
+    const maxIdx = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(index, maxIdx));
+
+    if (slides.length > 0 && slides[0]) {
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      const offset = -(currentIndex * slideWidth);
+      track.style.transform = `translateX(${offset}px)`;
+      currentTranslate = offset;
+      prevTranslate = offset;
+    }
+
+    // Atualiza estado dos botões de seta
+    if (prevBtn) {
+      prevBtn.disabled = currentIndex <= 0;
+    }
+    if (nextBtn) {
+      nextBtn.disabled = currentIndex >= maxIdx;
+    }
+
+    // Atualiza indicadores (dots)
+    if (dotsContainer) {
+      const dots = dotsContainer.querySelectorAll('.ebradi-exp-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+        dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+      });
+    }
+  }
+
+  function setupDots() {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    const maxIdx = getMaxIndex();
+    const count = maxIdx + 1;
+
+    for (let i = 0; i < count; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `ebradi-exp-dot ${i === currentIndex ? 'active' : ''}`;
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+      dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+      dot.addEventListener('click', () => {
+        updateSlidePosition(i);
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Event Listeners dos botões de navegação
+  prevBtn?.addEventListener('click', () => {
+    updateSlidePosition(currentIndex - 1);
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    updateSlidePosition(currentIndex + 1);
+  });
+
+  // Suporte a Touch e Drag
+  function touchStart(e) {
+    isDragging = true;
+    startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    track.style.transition = 'none';
+  }
+
+  function touchMove(e) {
+    if (!isDragging) return;
+    const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    const diff = currentX - startX;
+    track.style.transform = `translateX(${prevTranslate + diff}px)`;
+  }
+
+  function touchEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)';
+    const endX = e.type.includes('mouse') ? e.pageX : (e.changedTouches ? e.changedTouches[0].clientX : startX);
+    const movedBy = endX - startX;
+
+    if (movedBy < -50) {
+      updateSlidePosition(currentIndex + 1);
+    } else if (movedBy > 50) {
+      updateSlidePosition(currentIndex - 1);
+    } else {
+      updateSlidePosition(currentIndex);
+    }
+  }
+
+  trackContainer.addEventListener('touchstart', touchStart, { passive: true });
+  trackContainer.addEventListener('touchmove', touchMove, { passive: true });
+  trackContainer.addEventListener('touchend', touchEnd);
+
+  trackContainer.addEventListener('mousedown', touchStart);
+  window.addEventListener('mousemove', touchMove);
+  window.addEventListener('mouseup', touchEnd);
+
+  // Resize handler
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      setupDots();
+      updateSlidePosition(currentIndex);
+    }, 150);
+  });
+
+  // Inicialização
+  setupDots();
+  updateSlidePosition(0);
+
+  // ========================================================
+  // MODAL INTERATIVO DE AULAS EXPERIMENTAIS
+  // ========================================================
+  const modal = document.getElementById('ebradiExpModal');
+  const iframe = document.getElementById('ebradiExpIframe');
+  const modalTitle = document.getElementById('ebradiExpModalTitle');
+  const modalDiscipline = document.getElementById('ebradiExpModalDiscipline');
+  const modalLesson = document.getElementById('ebradiExpModalLesson');
+  const modalAction = document.getElementById('ebradiExpModalAction');
+  const closeBtn = document.getElementById('ebradiExpClose');
+  const dismissBtn = document.getElementById('ebradiExpModalDismiss');
+  const backdrop = document.getElementById('ebradiExpBackdrop');
+
+  function openExpModal(cardData) {
+    if (!modal || !iframe) return;
+
+    if (modalTitle) modalTitle.textContent = cardData.course || '';
+    if (modalDiscipline) modalDiscipline.textContent = cardData.discipline || '';
+    if (modalLesson) modalLesson.textContent = cardData.lesson || '';
+    if (modalAction && cardData.url) {
+      modalAction.href = cardData.url;
+    }
+
+    if (cardData.video) {
+      iframe.src = `https://www.youtube-nocookie.com/embed/${cardData.video}?autoplay=1&rel=0&modestbranding=1`;
+    }
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeExpModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    if (iframe) {
+      iframe.src = '';
+    }
+    document.body.style.overflow = '';
+  }
+
+  // Ouvintes de clique nos cards
+  document.querySelectorAll('.ebradi-exp-cta').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cardData = {
+        course: btn.getAttribute('data-course'),
+        discipline: btn.getAttribute('data-discipline'),
+        lesson: btn.getAttribute('data-lesson'),
+        prof: btn.getAttribute('data-prof'),
+        video: btn.getAttribute('data-video'),
+        url: btn.getAttribute('data-url'),
+      };
+      openExpModal(cardData);
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeExpModal);
+  dismissBtn?.addEventListener('click', closeExpModal);
+  backdrop?.addEventListener('click', closeExpModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+      closeExpModal();
+    }
+  });
+});
+
+
 
